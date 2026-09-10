@@ -23,7 +23,7 @@ The site complements, and does not duplicate, the engineering portfolio at `http
 | Employment gap | Jan 2025 to present = "Founder & AI/Automation Engineer, Streamlite Technologies, Chilliwack BC". Bullets derived from the portfolio case studies |
 | Camosun College | Business Analyst Certificate, completed 18 March 2025 |
 | Approach | Static single page, no framework. Content in one JSON file, ~100-line Node build script with no runtime dependencies |
-| Hosting | GitHub Pages from a public repo `jachaveza26/cv`, deployed by GitHub Actions |
+| Hosting | Railway, static files served by Caddy from a multi-stage Dockerfile, in the same Railway account as `streamlite.ca`. Repo `jachaveza26/cv` on GitHub (public, for consistency with the portfolio; Railway does not require it). GitHub Actions is the quality gate; Railway deploys from `main` through its GitHub integration |
 | PDF | Generated in CI by headless Chromium from the print stylesheet, Letter size |
 
 ## Content sources and rules
@@ -40,21 +40,24 @@ The site complements, and does not duplicate, the engineering portfolio at `http
 cv/
   content/cv.json              all content, single source of truth
   content/cv.schema.json       JSON Schema used by the build and the tests
-  src/build.mjs                Node (no dependencies): cv.json → dist/index.html, copies css + assets + CNAME
+  src/build.mjs                Node (no dependencies): cv.json → dist/index.html, copies css + assets
   src/styles.css               screen styles + @media print
   assets/andres-chavez.jpg     original photo
   assets/andres-chavez-400.webp  resized for the page (generated once, committed)
   assets/og-image.png          1200×630 Open Graph image (generated once, committed)
   scripts/pdf.mjs              Playwright: dist/index.html (print media) → dist/Andres-Chavez-CV.pdf
   test/build.test.mjs          node:test suite (see Quality)
-  .github/workflows/deploy.yml build → test → html-validate → lychee → pdf → deploy to Pages
+  .github/workflows/checks.yml build → test → html-validate → lychee → pdf (quality gate, no deploy)
+  Dockerfile                   stage 1: Playwright image builds dist/ + PDF; stage 2: caddy:2-alpine serves dist/
+  Caddyfile                    static file server, compression, cache headers, /Andres-Chavez-CV.pdf as attachment
+  railway.json                 builder: DOCKERFILE, healthcheck path /
   docs/superpowers/specs/      this document
   package.json                 devDependencies only: playwright, html-validate
   README.md                    what this is, how to build, workflow badge
   .gitignore                   dist/, node_modules/
 ```
 
-`dist/` is never committed. `CNAME` is written into `dist/` by the build so Pages keeps the custom domain across deploys.
+`dist/` is never committed. The Docker image is the deploy artifact: Railway builds it from the repo on every push to `main`.
 
 ## Content model (`cv.json`)
 
@@ -107,7 +110,9 @@ Restrained editorial style. One typeface: the system font stack (no external fon
 
 ## Build and deploy
 
-`deploy.yml`, triggered on push to `main` and manually:
+Two independent paths run on every push to `main`. Railway deploys regardless of the Actions result, so the Actions job is a signal, not a gate; the Dockerfile itself fails the Railway build if the site or the PDF cannot be produced.
+
+**GitHub Actions `checks.yml`** (push to `main`, pull requests, manual):
 
 1. Checkout, setup Node 22.
 2. `npm ci`.
@@ -115,36 +120,42 @@ Restrained editorial style. One typeface: the system font stack (no external fon
 4. `node --test` (tests below).
 5. `npx html-validate dist/index.html`.
 6. `lychee --accept 200,206,403,429,999 dist/index.html` (same list as the portfolio workflow; LinkedIn answers 999 to bots).
-7. `npx playwright install --with-deps chromium` and `node scripts/pdf.mjs`.
-8. Upload `dist/` and deploy with `actions/deploy-pages`.
+7. `npx playwright install --with-deps chromium` and `node scripts/pdf.mjs`; fail if the PDF is missing or over three pages.
 
-Local development: `npm run build && npx serve dist` or open `dist/index.html` directly. `npm run pdf` regenerates the PDF locally.
+**Railway** (GitHub integration, branch `main`, `railway.json` with `builder: DOCKERFILE`):
+
+- `Dockerfile` stage 1, `mcr.microsoft.com/playwright:<pinned>-jammy`: `npm ci`, `node src/build.mjs`, `node scripts/pdf.mjs`. Any failure stops the image build and the previous deploy stays live.
+- `Dockerfile` stage 2, `caddy:2-alpine`: copies `dist/` and `Caddyfile`; serves on `$PORT` with gzip/zstd, long cache on hashed assets, `Content-Disposition: attachment` on the PDF.
+- Healthcheck on `/`. Custom domain `andres.streamlite.ca` added in the Railway service; Railway issues the TLS certificate.
+
+Local development: `npm run build && npx serve dist` or open `dist/index.html` directly. `npm run pdf` regenerates the PDF locally. `docker build . && docker run -p 8080:8080` reproduces production.
 
 ## Quality
 
 `test/build.test.mjs` with `node:test`:
 
 - `cv.json` validates against the schema.
-- The build produces `dist/index.html`, `dist/styles.css`, `dist/CNAME`, and the photo.
+- The build produces `dist/index.html`, `dist/styles.css`, and the photo.
 - Every `href` in the generated HTML that starts with `#` matches an element `id`.
 - Every project card links to `https://github.com/jachaveza26/portfolio/blob/main/projects/<file>.md`.
 - Experience entries render newest first and `end: null` renders as "Present".
 - No phone number pattern appears anywhere in `dist/`.
 
-Plus html-validate and lychee in CI. Workflow badge in `README.md`.
+Plus html-validate and lychee in CI. Workflow badge in `README.md`. A container smoke test in the suite is out of scope; the Railway healthcheck covers it.
 
 ## Error handling
 
 - Missing or malformed content: build exits non-zero with the schema error; nothing deploys.
 - Dead link: lychee fails the job; the previous deploy stays live.
 - PDF generation failure: job fails; the previous deploy stays live.
-- Pages/DNS misconfiguration: the site still serves at `jachaveza26.github.io/cv` until the CNAME resolves.
+- DNS misconfiguration: the site still serves at the Railway-generated `*.up.railway.app` URL until the CNAME resolves.
 
-## DNS and Pages setup (manual, Andrés)
+## DNS and Railway setup (manual, Andrés)
 
 1. Create the public repo `jachaveza26/cv` (empty, as with the other two).
-2. In GoDaddy DNS for `streamlite.ca`: add `CNAME andres → jachaveza26.github.io`.
-3. In the repo Settings → Pages: source "GitHub Actions". Custom domain `andres.streamlite.ca`, enforce HTTPS once the certificate is issued.
+2. In Railway: new service from the GitHub repo `jachaveza26/cv`, branch `main`. Railway detects `railway.json` and builds the Dockerfile. Confirm the service answers on its `*.up.railway.app` URL.
+3. In the Railway service, Settings → Networking → Custom Domain: `andres.streamlite.ca`. Railway shows the CNAME target.
+4. In GoDaddy DNS for `streamlite.ca`: add `CNAME andres → <target shown by Railway>`. Wait for Railway to report the certificate as issued.
 
 ## Git rules for this repo
 
