@@ -2,7 +2,7 @@
 
 **Date:** 2026-09-10
 **Owner:** Andrés Chávez
-**Status:** approved in conversation, pending written review
+**Status:** implemented on branch `feat/cv-site`; pending content approval and publish
 
 ## Goal
 
@@ -24,7 +24,7 @@ The site complements, and does not duplicate, the engineering portfolio at `http
 | Camosun College | Business Analyst Certificate, completed 18 March 2025 |
 | Approach | Static single page, no framework. Content in one JSON file, ~100-line Node build script with no runtime dependencies |
 | Hosting | Railway, static files served by Caddy from a multi-stage Dockerfile, in the same Railway account as `streamlite.ca`. Repo `jachaveza26/cv` on GitHub (public, for consistency with the portfolio; Railway does not require it). GitHub Actions is the quality gate; Railway deploys from `main` through its GitHub integration |
-| PDF | Generated in CI by headless Chromium from the print stylesheet, Letter size |
+| PDF | Generated in CI by headless Chromium from the print stylesheet, Letter size, 10pt, cap of four pages |
 
 ## Content sources and rules
 
@@ -102,7 +102,7 @@ Restrained editorial style. One typeface: the system font stack (no external fon
 
 ## Print / PDF
 
-`@media print` hides the navigation and footer, shrinks the photo, forces light palette, keeps link URLs visible for the key links (email, LinkedIn, GitHub, portfolio), and sets page breaks so the result is two Letter pages. `scripts/pdf.mjs` launches Chromium through Playwright, opens `dist/index.html` with `media: print`, and writes `dist/Andres-Chavez-CV.pdf`. The header's Download PDF button links to that file. CI fails if the PDF is not produced or exceeds three pages.
+`@media print` hides the navigation and footer, shrinks the photo, forces light palette, keeps link URLs visible for the key links (email, LinkedIn, GitHub, portfolio), and sets page breaks so the result is three to four Letter pages at a 10pt body size (the approved content does not fit in fewer at a readable size; long roles may split across pages with their heading kept together, project cards flow as inline blocks, and the per-card stack chips are hidden in print because the Skills section lists them). `scripts/pdf.mjs` launches Chromium through Playwright, opens `dist/index.html` with `media: print`, and writes `dist/Andres-Chavez-CV.pdf`. The header's Download PDF button links to that file. CI fails if the PDF is not produced or exceeds four pages.
 
 ## SEO and metadata
 
@@ -120,7 +120,7 @@ Two independent paths run on every push to `main`. Railway deploys regardless of
 4. `node --test` (tests below).
 5. `npx html-validate dist/index.html`.
 6. `lychee --accept 200,206,403,429,999 dist/index.html` (same list as the portfolio workflow; LinkedIn answers 999 to bots).
-7. `npx playwright install --with-deps chromium` and `node scripts/pdf.mjs`; fail if the PDF is missing or over three pages.
+7. `npx playwright install --with-deps chromium` and `node scripts/pdf.mjs`; fail if the PDF is missing or over four pages.
 
 **Railway** (GitHub integration, branch `main`, `railway.json` with `builder: DOCKERFILE`):
 
