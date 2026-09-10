@@ -110,7 +110,7 @@ const footer = (cv, updated) => `<footer>
 </footer>`;
 
 export function render(cv, { updated }) {
-  return `<!doctype html>
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
 ${head(cv, updated)}
