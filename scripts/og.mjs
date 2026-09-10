@@ -16,8 +16,11 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><style>
 </body></html>`;
 
 const browser = await chromium.launch();
-const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
-await page.setContent(html, { waitUntil: "load" });
-await page.screenshot({ path: "assets/og-image.png", type: "png" });
-await browser.close();
+try {
+  const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
+  await page.setContent(html, { waitUntil: "load" });
+  await page.screenshot({ path: "assets/og-image.png", type: "png" });
+} finally {
+  await browser.close();
+}
 console.log("wrote assets/og-image.png");

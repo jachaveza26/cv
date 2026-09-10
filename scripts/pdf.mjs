@@ -12,17 +12,20 @@ if (!existsSync(index)) {
 }
 
 const browser = await chromium.launch();
-const page = await browser.newPage();
-await page.goto(pathToFileURL(index).href, { waitUntil: "load" });
-await page.emulateMedia({ media: "print" });
-await page.pdf({
-  path: out,
-  format: "Letter",
-  printBackground: true,
-  preferCSSPageSize: true,
-  margin: { top: "0.6in", bottom: "0.6in", left: "0.7in", right: "0.7in" },
-});
-await browser.close();
+try {
+  const page = await browser.newPage();
+  await page.goto(pathToFileURL(index).href, { waitUntil: "load" });
+  await page.emulateMedia({ media: "print" });
+  await page.pdf({
+    path: out,
+    format: "Letter",
+    printBackground: true,
+    preferCSSPageSize: true,
+    margin: { top: "0.6in", bottom: "0.6in", left: "0.7in", right: "0.7in" },
+  });
+} finally {
+  await browser.close();
+}
 
 // Chromium writes page objects uncompressed, so counting "/Type /Page" (not "/Pages") is reliable enough for a guard.
 const pages = (readFileSync(out, "latin1").match(/\/Type\s*\/Page(?!s)/g) ?? []).length;
