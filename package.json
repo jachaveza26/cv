@@ -1,0 +1,18 @@
+{
+  "name": "andres-cv",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "node src/build.mjs",
+    "test": "node --test test/",
+    "pdf": "node scripts/pdf.mjs",
+    "og": "node scripts/og.mjs",
+    "validate:html": "html-validate dist/index.html",
+    "serve": "npx --yes serve dist"
+  },
+  "devDependencies": {
+    "html-validate": "11.15.0",
+    "playwright": "1.63.0"
+  }
+}
