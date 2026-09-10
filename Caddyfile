@@ -1,0 +1,21 @@
+{
+	admin off
+	auto_https off
+}
+
+:{$PORT:8080} {
+	root * /srv
+	encode zstd gzip
+
+	@pdf path /Andres-Chavez-CV.pdf
+	header @pdf Content-Disposition "attachment; filename=\"Andres-Chavez-CV.pdf\""
+	header @pdf Cache-Control "public, max-age=300"
+
+	@static path /assets/* /styles.css
+	header @static Cache-Control "public, max-age=86400"
+
+	header X-Content-Type-Options nosniff
+	header Referrer-Policy strict-origin-when-cross-origin
+
+	file_server
+}
