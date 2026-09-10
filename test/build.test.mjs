@@ -42,7 +42,7 @@ test("every project card links to a case study in the portfolio repo", () => {
 });
 
 test("experience is newest first and the open role says Present", () => {
-  const starts = [...html.matchAll(/<time datetime="(\d{4}-\d{2})"/g)].map((m) => m[1]);
+  const starts = [...html.matchAll(/<p class="dates"><time datetime="(\d{4}-\d{2})"/g)].map((m) => m[1]);
   const sorted = [...starts].sort().reverse();
   assert.deepEqual(starts, sorted);
   assert.match(html, /Jan 2025<\/time> – Present/);

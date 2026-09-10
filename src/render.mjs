@@ -69,7 +69,7 @@ const nav = () => `<nav class="topnav" aria-label="Sections">
 const about = (cv) => `<section id="about"><h2>About</h2>${cv.profile.map((p) => `<p>${esc(p)}</p>`).join("")}</section>`;
 
 function job(j) {
-  const dates = `<p class="dates"><time datetime="${j.start}">${fmtMonth(j.start)}</time> – ${j.end ? fmtMonth(j.end) : "Present"}</p>`;
+  const dates = `<p class="dates"><time datetime="${j.start}">${fmtMonth(j.start)}</time> – ${j.end ? `<time datetime="${j.end}">${fmtMonth(j.end)}</time>` : "Present"}</p>`;
   const head = `<div class="job-head"><h3>${esc(j.role)}</h3><p class="org">${esc(j.org)} · ${esc(j.location)}</p>${dates}</div>`;
   if (j.compact) return `<article class="job compact" id="job-${slug(j.org)}">${head}<p class="summary">${esc(j.summary)}</p></article>`;
   const summary = j.summary ? `<p class="summary">${esc(j.summary)}</p>` : "";
