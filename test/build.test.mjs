@@ -4,7 +4,7 @@ import { mkdtempSync, readFileSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { build } from "../src/build.mjs";
-import { fmtMonth, esc } from "../src/render.mjs";
+import { fmtMonth, esc, render } from "../src/render.mjs";
 
 let out, html;
 before(() => {
@@ -63,4 +63,27 @@ test("metadata: title, canonical, og image, JSON-LD person, updated date", () =>
 
 test("PDF button links to the generated file", () => {
   assert.match(html, /class="btn btn-pdf" href="Andres-Chavez-CV\.pdf" download/);
+});
+
+test("render() escapes hostile content everywhere it reaches HTML", () => {
+  const cv = JSON.parse(readFileSync(new URL("../content/cv.json", import.meta.url), "utf8"));
+  const hostile = `"><script>x</script>`;
+  cv.identity.site = `https://example.com${hostile}`;
+  cv.identity.name = `Name${hostile}`;
+  cv.experience[0].summary = `Summary${hostile}`;
+  const out = render(cv, { updated: "2026-09-10" });
+  assert.doesNotMatch(out, /<script(?! type="application\/ld\+json")/);
+});
+
+test("compact entries render two lines with no bullets and no links", () => {
+  const compact = [...html.matchAll(/<article class="job compact"[\s\S]*?<\/article>/g)].map((m) => m[0]);
+  assert.equal(compact.length, 2);
+  for (const a of compact) {
+    assert.doesNotMatch(a, /<ul/);
+    assert.doesNotMatch(a, /class="links"/);
+  }
+});
+
+test("build copies the Open Graph image", () => {
+  assert.ok(existsSync(path.join(out, "assets", "og-image.png")));
 });

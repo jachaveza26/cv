@@ -31,19 +31,19 @@ function head(cv, updated) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(name)} — ${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
-<link rel="canonical" href="${site}/">
+<link rel="canonical" href="${esc(site)}/">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="${esc(name)} — ${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
-<meta property="og:url" content="${site}/">
-<meta property="og:image" content="${site}/assets/og-image.png">
+<meta property="og:url" content="${esc(site)}/">
+<meta property="og:image" content="${esc(site)}/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="styles.css">
 <script type="application/ld+json">${JSON.stringify(person).replace(/</g, "\\u003c")}</script>`;
 }
 
 function header(cv) {
-  const { name, title, tagline, location, email, linkedin, github, photo } = cv.identity;
+  const { name, title, tagline, location, email, linkedin, github, photo, portfolio } = cv.identity;
   return `<header class="hero">
   <img class="photo" src="assets/${esc(photo)}" alt="Portrait of ${esc(name)}" width="200" height="267">
   <div class="hero-text">
@@ -57,7 +57,7 @@ function header(cv) {
       <a class="btn" href="${esc(github)}" rel="me">GitHub</a>
       <a class="btn btn-pdf" href="Andres-Chavez-CV.pdf" download>Download PDF</a>
     </p>
-    <p class="print-contact">${esc(email)} · ${esc(linkedin)} · ${esc(github)}</p>
+    <p class="print-contact">${esc(email)} · ${esc(linkedin)} · ${esc(github)} · ${esc(portfolio)}</p>
   </div>
 </header>`;
 }

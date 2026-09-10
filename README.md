@@ -14,7 +14,7 @@ Personal CV site for Andrés Chávez. One JSON file in, one static page and one 
 
 ```bash
 npm install
-npm run build && npx serve dist
+npm run build && npm run serve
 npm test
 npx playwright install chromium && npm run pdf
 docker build -t andres-cv . && docker run --rm -p 8080:8080 andres-cv

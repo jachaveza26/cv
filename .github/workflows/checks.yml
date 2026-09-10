@@ -42,6 +42,7 @@ jobs:
           fail: true
 
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: Andres-Chavez-CV
           path: dist/Andres-Chavez-CV.pdf

@@ -16,7 +16,7 @@
         "linkedin": { "type": "string", "pattern": "^https://www\\.linkedin\\.com/in/" },
         "github": { "type": "string", "pattern": "^https://github\\.com/" },
         "portfolio": { "type": "string", "pattern": "^https://github\\.com/jachaveza26/portfolio$" },
-        "site": { "type": "string", "pattern": "^https://" },
+        "site": { "type": "string", "pattern": "^https://[a-z0-9.-]+$" },
         "photo": { "type": "string", "pattern": "\\.(webp|jpg|png)$" }
       }
     },

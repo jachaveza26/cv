@@ -92,6 +92,7 @@ footer { border-top: 1px solid var(--line); padding: 1.5rem 1.25rem 3rem; text-a
   .job-head { break-inside: avoid; break-after: avoid; }
   p, li { orphans: 3; widows: 3; }
   .grid { display: block; }
+  /* cards are emitted with no whitespace between them (render.mjs projects() joins with "") — inline-block layout relies on that */
   .card { display: inline-block; vertical-align: top; width: 32%; margin: 0 0.6% 0.08in 0; padding: 0.08in; border-radius: 4px; break-inside: avoid; }
   .chips { display: none; }
   a { color: inherit; text-decoration: none; }

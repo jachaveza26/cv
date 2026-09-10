@@ -18,7 +18,8 @@ export function build({ outDir = path.join(root, "dist"), now = new Date() } = {
   cpSync(path.join(root, "src/styles.css"), path.join(outDir, "styles.css"));
   for (const file of [cv.identity.photo, "og-image.png"]) {
     const src = path.join(root, "assets", file);
-    if (existsSync(src)) cpSync(src, path.join(outDir, "assets", file));
+    if (!existsSync(src)) throw new Error(`required asset missing: assets/${file}`);
+    cpSync(src, path.join(outDir, "assets", file));
   }
   return outDir;
 }

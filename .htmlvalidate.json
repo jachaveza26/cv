@@ -1,6 +1,1 @@
-{
-  "extends": ["html-validate:recommended"],
-  "rules": {
-    "no-inline-style": "off"
-  }
-}
+{ "extends": ["html-validate:recommended"] }
