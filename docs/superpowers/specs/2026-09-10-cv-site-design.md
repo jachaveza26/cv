@@ -21,10 +21,11 @@ The site complements, and does not duplicate, the engineering portfolio at `http
 | Public contact | `andres@streamlite.ca` and LinkedIn (`linkedin.com/in/jachaveza`). GitHub (`github.com/jachaveza26`). **No phone number.** |
 | Photo | `streamlite-website/public/home/assets/andres-chavez.jpg` (900×1200 JPEG), copied into this repo |
 | Employment gap | Jan 2025 to present = "Founder & AI/Automation Engineer, Streamlite Technologies, Chilliwack BC". Bullets derived from the portfolio case studies |
+| Pre-2025 history (Andrés's decisions, 2026-09-10) | ZMBDi omitted. "PSM Payment Services" shown as Prosepago, part-time, Sep 2020 – Apr 2021, noting the 2025 re-engagement. Conduent kept as Apr 2021 – Aug 2021. Agile Thought Aug 2021 – Sep 2022 (5-month overlap with Fernando Torres Immigration kept as is). LANIX and DSC merged into one compact "Earlier career" entry. "Business tools" skills group dropped |
 | Camosun College | Business Analyst Certificate, completed 18 March 2025 |
 | Approach | Static single page, no framework. Content in one JSON file, ~100-line Node build script with no runtime dependencies |
 | Hosting | Railway, static files served by Caddy from a multi-stage Dockerfile, in the same Railway account as `streamlite.ca`. Repo `jachaveza26/cv` on GitHub (public, for consistency with the portfolio; Railway does not require it). GitHub Actions is the quality gate; Railway deploys from `main` through its GitHub integration |
-| PDF | Generated in CI by headless Chromium from the print stylesheet, Letter size, 10pt, cap of four pages |
+| PDF | Generated in CI by headless Chromium from the print stylesheet, Letter size, 9.5pt body, 0.5in/0.6in margins, two pages, cap of three. Print variant: featured projects only (one line each), `skills.pdf` groups, soft-skill names only |
 
 ## Content sources and rules
 
@@ -69,9 +70,10 @@ cv/
     { "role", "org", "location", "start": "YYYY-MM", "end": "YYYY-MM" | null,
       "summary", "bullets": [], "links": [{ "label", "url" }], "compact": false }
   ],
-  "projects": [ { "name", "oneLiner", "stack": [], "status", "url" } ],
+  "projects": [ { "name", "oneLiner", "stack": [], "status", "featured", "url" } ],
   "skills": {
     "hard": [ { "group", "items": [] } ],
+    "pdf":  [ { "group", "items": [] } ],
     "soft": [ { "name", "evidence" } ]
   },
   "education": [ { "credential", "institution", "country", "year" } ],
@@ -102,7 +104,7 @@ Restrained editorial style. One typeface: the system font stack (no external fon
 
 ## Print / PDF
 
-`@media print` hides the navigation and footer, shrinks the photo, forces light palette, keeps link URLs visible for the key links (email, LinkedIn, GitHub, portfolio), and sets page breaks so the result is three to four Letter pages at a 10pt body size (the approved content does not fit in fewer at a readable size; long roles may split across pages with their heading kept together, project cards flow as inline blocks, and the per-card stack chips are hidden in print because the Skills section lists them). `scripts/pdf.mjs` launches Chromium through Playwright, opens `dist/index.html` with `media: print`, and writes `dist/Andres-Chavez-CV.pdf`. The header's Download PDF button links to that file. CI fails if the PDF is not produced or exceeds four pages.
+`@media print` hides the navigation and footer, shrinks the photo, forces light palette, keeps link URLs visible for the key links (email, LinkedIn, GitHub, portfolio), and sets page breaks so the result is two Letter pages at a 9.5pt body size: long roles may split across pages with their heading kept together; only `featured` projects print, one line each; the technical skills print from `skills.pdf` (five groups, ~22 items) while the web shows all `skills.hard` groups; soft skills print as names only; the projects lede and case-study link line are hidden in print because the portfolio URL is in the contact line. `scripts/pdf.mjs` launches Chromium through Playwright, opens `dist/index.html` with `media: print`, and writes `dist/Andres-Chavez-CV.pdf`. The header's Download PDF button links to that file. CI fails if the PDF is not produced or exceeds three pages.
 
 ## SEO and metadata
 
@@ -120,7 +122,7 @@ Two independent paths run on every push to `main`. Railway deploys regardless of
 4. `node --test` (tests below).
 5. `npx html-validate dist/index.html`.
 6. `lychee --accept 200,206,403,429,999 dist/index.html` (same list as the portfolio workflow; LinkedIn answers 999 to bots).
-7. `npx playwright install --with-deps chromium` and `node scripts/pdf.mjs`; fail if the PDF is missing or over four pages.
+7. `npx playwright install --with-deps chromium` and `node scripts/pdf.mjs`; fail if the PDF is missing or over three pages.
 
 **Railway** (GitHub integration, branch `main`, `railway.json` with `builder: DOCKERFILE`):
 
