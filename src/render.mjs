@@ -93,10 +93,9 @@ const projects = (cv) => `<section id="projects"><h2>Selected projects</h2>
 
 const skills = (cv) => `<section id="skills"><h2>Skills</h2>
 <h3>Technical</h3>
-<dl class="hard screen-only">${cv.skills.hard.map((g) => `<dt>${esc(g.group)}</dt><dd>${g.items.map(esc).join(" · ")}</dd>`).join("")}</dl>
-<dl class="hard print-only">${cv.skills.pdf.map((g) => `<dt>${esc(g.group)}</dt><dd>${g.items.map(esc).join(" · ")}</dd>`).join("")}</dl>
-<h3>How I work</h3>
-<dl class="soft">${cv.skills.soft.map((s) => `<dt>${esc(s.name)}</dt><dd>${esc(s.evidence)}</dd>`).join("")}</dl></section>`;
+<dl class="hard">${cv.skills.hard.map((g) => `<dt>${esc(g.group)}</dt><dd>${g.items.map(esc).join(" · ")}</dd>`).join("")}</dl>
+<div class="soft-block"><h3>How I work</h3>
+<dl class="soft">${cv.skills.soft.map((s) => `<dt>${esc(s.name)}</dt><dd>${esc(s.evidence)}</dd>`).join("")}</dl></div></section>`;
 
 const education = (cv) => `<section id="education"><h2>Education</h2>
 <ul class="edu">${cv.education.map((e) => `<li><strong>${esc(e.credential)}</strong> — ${esc(e.institution)}, ${esc(e.country)}, ${esc(e.year)}</li>`).join("")}</ul>

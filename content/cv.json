@@ -122,7 +122,7 @@
     { "name": "Relay", "oneLiner": "Multi-tenant social and local-SEO automation, deployed per client on isolated branches.", "stack": ["TypeScript", "Supabase", "Meta Graph API", "DataForSEO"], "status": "Production, paying client", "featured": true, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/relay.md" },
     { "name": "Prosepago", "oneLiner": "~30M-row Power BI model for a Mexican POS distributor, plus PLD/AML transactional monitoring and open-data prospecting.", "stack": ["Power BI", "DAX", "Python", "PostgreSQL"], "status": "Production", "featured": true, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/prosepago-bi.md" },
     { "name": "Eden Estimator", "oneLiner": "The repo where my engineering practices live: Vitest suite, Docker, Caddy, pnpm monorepo, sliced delivery.", "stack": ["TypeScript", "Vitest", "Docker", "Supabase"], "status": "In development", "featured": false, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/eden-estimator.md" },
-    { "name": "Licence Reconciliation", "oneLiner": "Microsoft licence drift detector built as a paid-evaluation prototype — 100% recall, zero false positives on a ground-truth set.", "stack": ["Python", "FastAPI", "Microsoft Graph"], "status": "Prototype, delivered", "featured": true, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/licence-reconciliation.md" },
+    { "name": "Licence Reconciliation", "oneLiner": "Microsoft licence drift detector built as a paid-evaluation prototype — 100% recall, zero false positives on a ground-truth set.", "stack": ["Python", "FastAPI", "Microsoft Graph"], "status": "Prototype, delivered", "featured": false, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/licence-reconciliation.md" },
     { "name": "Voice Agents", "oneLiner": "Retell and VAPI voice agents embedded in a Next.js product surface.", "stack": ["Next.js", "Retell AI", "VAPI"], "status": "Production", "featured": false, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/voice-agents.md" },
     { "name": "CFSF Loan Automation", "oneLiner": "Nine-deliverable automation architecture for a non-profit lender, designed under a hard no-PII constraint.", "stack": ["FastAPI", "AI agents", "DocuSign (Phase 2)"], "status": "Designed, not built", "featured": false, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/cfsf-loan-automation.md" },
     { "name": "Content Pipeline", "oneLiner": "Near-fully automated Spanish video pipeline with data-driven niche validation and a tiered model-cost strategy.", "stack": ["Python", "SQLite", "Streamlit", "multi-model video APIs"], "status": "Production", "featured": false, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/content-pipeline.md" },
@@ -139,13 +139,6 @@
       { "group": "Infra", "items": ["Docker", "Railway", "Cloudflare Pages", "GitHub Actions"] },
       { "group": "Quality", "items": ["conventional commits", "sliced delivery"] },
       { "group": "Security", "items": ["OAuth 2.0", "per-tenant ownership validation"] }
-    ],
-    "pdf": [
-      { "group": "Languages", "items": ["Python", "TypeScript", "SQL / PLpgSQL", "DAX"] },
-      { "group": "AI / LLM", "items": ["Claude API & tool use", "Gemini", "OpenAI", "MCP servers", "guardrail design & fact-checking", "multi-agent orchestration", "prompt versioning", "Retell / VAPI"] },
-      { "group": "Backend & data", "items": ["FastAPI", "Supabase (Postgres, pg_cron)", "Next.js", "React", "n8n", "Power BI"] },
-      { "group": "Integrations", "items": ["Google Business Profile API", "Microsoft Graph", "Meta Graph", "Stripe", "Twilio"] },
-      { "group": "Infra & quality", "items": ["Docker", "Railway", "GitHub Actions", "OAuth 2.0"] }
     ],
     "soft": [
       { "name": "Client discovery and scoping", "evidence": "Runs paid discovery workshops credited against the build, so scope is defined before code is written." },

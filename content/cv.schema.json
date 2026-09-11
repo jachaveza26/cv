@@ -68,23 +68,10 @@
     },
     "skills": {
       "type": "object",
-      "required": ["hard", "pdf", "soft"],
+      "required": ["hard", "soft"],
       "additionalProperties": false,
       "properties": {
         "hard": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "required": ["group", "items"],
-            "additionalProperties": false,
-            "properties": {
-              "group": { "type": "string", "minLength": 1 },
-              "items": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
-            }
-          }
-        },
-        "pdf": {
           "type": "array",
           "minItems": 1,
           "items": {

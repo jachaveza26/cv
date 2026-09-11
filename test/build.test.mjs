@@ -88,8 +88,8 @@ test("build copies the Open Graph image", () => {
   assert.ok(existsSync(path.join(out, "assets", "og-image.png")));
 });
 
-test("exactly six cards carry the featured class", () => {
-  assert.equal((html.match(/class="card featured"/g) ?? []).length, 6);
+test("exactly five cards carry the featured class", () => {
+  assert.equal((html.match(/class="card featured"/g) ?? []).length, 5);
 });
 
 test("experience has six entries and no removed employers", () => {
@@ -97,28 +97,11 @@ test("experience has six entries and no removed employers", () => {
   assert.doesNotMatch(html, /ZMBDi|PSM Payment Services/);
 });
 
-test("every print skill item also appears in the web skill groups", () => {
-  const cv = JSON.parse(readFileSync(new URL("../content/cv.json", import.meta.url), "utf8"));
-  const flatHard = cv.skills.hard.flatMap((g) => g.items);
-  // a hard item may carry a parenthetical qualifier the print list drops for space
-  // (e.g. "Meta Graph (Standard Access)" -> "Meta Graph"); strip it for comparison.
-  const dropQualifier = (s) => s.replace(/\s*\([^)]*\)$/, "");
-  const flatHardBare = flatHard.map(dropQualifier);
-  const mergedLabels = new Set([
-    "guardrail design & fact-checking",
-    "Retell / VAPI",
-    "Supabase (Postgres, pg_cron)",
-  ]);
-  for (const group of cv.skills.pdf) {
-    for (const item of group.items) {
-      const ok = flatHard.includes(item) || flatHardBare.includes(item) || mergedLabels.has(item);
-      assert.ok(ok, `pdf skill "${item}" (group ${group.group}) not found in web skill groups or merge list`);
-    }
-  }
+test("soft skills are wrapped for print hiding", () => {
+  assert.match(html, /<div class="soft-block"><h3>How I work<\/h3>/);
 });
 
-test("print-only technical list is rendered from skills.pdf", () => {
-  assert.match(html, /<dl class="hard print-only">/);
-  const printDl = html.match(/<dl class="hard print-only">[\s\S]*?<\/dl>/)[0];
-  assert.match(printDl, /Backend &amp; data/);
+test("only one technical skills list is rendered", () => {
+  assert.equal((html.match(/<dl class="hard/g) ?? []).length, 1);
+  assert.doesNotMatch(html, /print-only|screen-only/);
 });
