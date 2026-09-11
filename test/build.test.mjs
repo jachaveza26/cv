@@ -72,7 +72,8 @@ test("render() escapes hostile content everywhere it reaches HTML", () => {
   cv.identity.name = `Name${hostile}`;
   cv.experience[0].summary = `Summary${hostile}`;
   const out = render(cv, { updated: "2026-09-10" });
-  assert.doesNotMatch(out, /<script(?! type="application\/ld\+json")/);
+  assert.ok(!out.includes(hostile), "hostile payload reached the HTML unescaped");
+  assert.ok(out.includes("&quot;&gt;&lt;script&gt;x&lt;/script&gt;"), "hostile payload should appear escaped");
 });
 
 test("compact entries render two lines with no bullets and no links", () => {

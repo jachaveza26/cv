@@ -71,11 +71,11 @@ h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(2.75rem, 7.5v
 .btn:active { transform: translateY(1px); }
 .btn-pdf { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 .btn-pdf:hover { background: color-mix(in srgb, var(--accent) 88%, var(--ink)); }
-.photo { width: 112px; height: auto; border-radius: 14px; display: block; box-shadow: var(--shadow); justify-self: start; order: -1; }
+.photo { width: 112px; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 15%; border-radius: 14px; display: block; box-shadow: var(--shadow); outline: 1px solid var(--rule); outline-offset: -1px; justify-self: start; order: -1; }
 .print-contact { display: none; }
 @media (min-width: 760px) {
-  .hero-inner { grid-template-columns: 1fr auto; gap: 3rem; }
-  .photo { width: 200px; justify-self: end; order: 0; }
+  .hero-inner { grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
+  .photo { width: 208px; justify-self: end; order: 0; }
 }
 
 /* one page-load moment, nothing else moves on its own */
@@ -93,12 +93,13 @@ h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(2.75rem, 7.5v
 main { max-width: 44rem; }
 .rail { position: sticky; top: 0; z-index: 2; display: flex; gap: 0.25rem 1.1rem; flex-wrap: wrap; padding: 0.75rem 0; margin: 0 -1.25rem 0.5rem; padding-inline: 1.25rem; background: color-mix(in srgb, var(--paper) 90%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); font-size: 0.92rem; }
 .rail a { color: var(--ink-soft); text-decoration: none; padding: 0.15rem 0; border-bottom: 1px solid transparent; transition: color 160ms ease, border-color 160ms ease; }
-.rail a:hover { color: var(--ink); border-color: var(--accent); }
+.rail a:hover, .rail a[aria-current] { color: var(--ink); border-color: var(--accent); }
+.rail a[aria-current] { font-weight: 600; }
 @media (min-width: 960px) {
   .layout { display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); gap: 4rem; align-items: start; }
   .rail { position: sticky; top: 2rem; display: flex; flex-direction: column; gap: 0.55rem; margin: 3.25rem 0 0; padding: 0; background: none; backdrop-filter: none; border: 0; }
   .rail a { border-bottom: 0; border-left: 2px solid transparent; padding-left: 0.85rem; margin-left: -0.85rem; }
-  .rail a:hover { border-left-color: var(--accent); }
+  .rail a:hover, .rail a[aria-current] { border-left-color: var(--accent); }
   main { max-width: none; }
 }
 

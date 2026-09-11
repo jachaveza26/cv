@@ -135,6 +135,22 @@ ${education(cv)}
 </main>
 </div>
 ${footer(cv, updated)}
+<script>
+(() => {
+  const links = [...document.querySelectorAll('.rail a[href^="#"]')];
+  const byId = new Map(links.map((a) => [a.getAttribute("href").slice(1), a]));
+  const sections = [...byId.keys()].map((id) => document.getElementById(id)).filter(Boolean);
+  if (!sections.length || !("IntersectionObserver" in window)) return;
+  const setCurrent = (id) => links.forEach((a) => (a === byId.get(id) ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current")));
+  const io = new IntersectionObserver((entries) => {
+    const hit = entries.filter((e) => e.isIntersecting).sort((x, y) => x.boundingClientRect.top - y.boundingClientRect.top)[0];
+    if (hit) setCurrent(hit.target.id);
+  }, { rootMargin: "-18% 0px -62% 0px", threshold: 0 });
+  setCurrent(sections[0].id);
+  sections.forEach((el) => io.observe(el));
+  addEventListener("scroll", () => { if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) setCurrent(sections.at(-1).id); }, { passive: true });
+})();
+</script>
 </body>
 </html>
 `;
