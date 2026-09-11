@@ -51,7 +51,7 @@ function header(cv) {
   <div class="hero-inner">
   <div class="hero-text">
     <h1>${esc(name)}</h1>
-    <p class="title">${esc(title)}<span class="location">${esc(location)}</span></p>
+    <p class="title">${esc(title)}, <span class="location">${esc(location)}</span></p>
     <p class="tagline">${esc(tagline)}</p>
     <p class="actions">
       <a class="btn" href="mailto:${esc(email)}">Email</a>
@@ -89,7 +89,7 @@ const experience = (cv) =>
 
 const projects = (cv) => `<section id="projects"><h2>Selected projects</h2>
 <p class="lede">One case study per project, written for another engineer, in the <a href="${esc(cv.identity.portfolio)}">portfolio repository</a>.</p>
-<div class="grid">
+<div class="projects">
 <div class="projects-featured">${cv.projects.filter((p) => p.featured).map(card).join("")}</div>
 <h3 class="more-title">Also built</h3>
 <div class="projects-more">${cv.projects.filter((p) => !p.featured).map(card).join("")}</div>
