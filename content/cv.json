@@ -131,21 +131,21 @@
   "skills": {
     "hard": [
       { "group": "Languages", "items": ["Python", "TypeScript", "SQL / PLpgSQL", "Kotlin", "DAX", "R"] },
-      { "group": "AI / LLM", "items": ["Claude API & tool use", "Gemini", "OpenRouter", "multi-agent orchestration", "guardrail design", "fact-checking", "prompt versioning", "Retell", "VAPI", "ElevenLabs"] },
+      { "group": "AI / LLM", "items": ["Claude API & tool use", "Gemini", "OpenAI", "MCP servers", "OpenRouter", "multi-agent orchestration", "guardrail design", "fact-checking", "prompt versioning", "Retell", "VAPI", "ElevenLabs"] },
       { "group": "Backend", "items": ["FastAPI", "Supabase (Postgres, auth, pg_cron)", "Next.js API routes", "n8n"] },
       { "group": "Frontend", "items": ["Next.js", "React", "Vite", "Tailwind"] },
-      { "group": "Data / BI", "items": ["Power BI", "DAX Studio", "Tabular ALM Toolkit", "Power Query", "pandas", "Apify", "Excel"] },
+      { "group": "Data / BI", "items": ["Power BI", "DAX Studio", "Tabular ALM Toolkit", "Power Query", "Apify", "Excel"] },
       { "group": "APIs & integrations", "items": ["Google Business Profile API", "Microsoft Graph", "Meta Graph (Standard Access)", "WhatsApp Cloud API", "BuildingConnected", "Jobber GraphQL", "Zoho", "Stripe", "Twilio", "DataForSEO"] },
-      { "group": "Infra", "items": ["Docker", "Caddy", "Railway", "Cloudflare Pages", "GitHub Actions"] },
-      { "group": "Quality", "items": ["Vitest", "conventional commits", "sliced delivery"] },
-      { "group": "Security", "items": ["OAuth 2.0", "single-use HMAC tokens", "per-tenant ownership validation"] }
+      { "group": "Infra", "items": ["Docker", "Railway", "Cloudflare Pages", "GitHub Actions"] },
+      { "group": "Quality", "items": ["conventional commits", "sliced delivery"] },
+      { "group": "Security", "items": ["OAuth 2.0", "per-tenant ownership validation"] }
     ],
     "pdf": [
       { "group": "Languages", "items": ["Python", "TypeScript", "SQL / PLpgSQL", "DAX"] },
-      { "group": "AI / LLM", "items": ["Claude API & tool use", "guardrail design & fact-checking", "multi-agent orchestration", "prompt versioning", "Retell / VAPI"] },
-      { "group": "Backend & data", "items": ["FastAPI", "Supabase (Postgres, pg_cron)", "Next.js", "n8n", "Power BI", "pandas"] },
+      { "group": "AI / LLM", "items": ["Claude API & tool use", "Gemini", "OpenAI", "MCP servers", "guardrail design & fact-checking", "multi-agent orchestration", "prompt versioning", "Retell / VAPI"] },
+      { "group": "Backend & data", "items": ["FastAPI", "Supabase (Postgres, pg_cron)", "Next.js", "React", "n8n", "Power BI"] },
       { "group": "Integrations", "items": ["Google Business Profile API", "Microsoft Graph", "Meta Graph", "Stripe", "Twilio"] },
-      { "group": "Infra & quality", "items": ["Docker", "Caddy", "Railway", "GitHub Actions", "Vitest", "OAuth 2.0 / HMAC tokens"] }
+      { "group": "Infra & quality", "items": ["Docker", "Railway", "GitHub Actions", "OAuth 2.0"] }
     ],
     "soft": [
       { "name": "Client discovery and scoping", "evidence": "Runs paid discovery workshops credited against the build, so scope is defined before code is written." },

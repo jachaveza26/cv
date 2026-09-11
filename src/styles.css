@@ -97,8 +97,8 @@ footer { border-top: 1px solid var(--line); padding: 1.5rem 1.25rem 3rem; text-a
   dl { margin: 0.04in 0 0.08in; gap: 0.02in 0.2in; }
 
   /* header */
-  .hero { grid-template-columns: 1in 1fr; gap: 0.2in; border-bottom: 1px solid var(--line); padding-bottom: 0.08in; }
-  .photo { width: 0.85in; border-radius: 6px; }
+  .hero { display: block; border-bottom: 1px solid var(--line); padding-bottom: 0.08in; }
+  .photo { display: none; }
   .print-contact { display: block; font-size: 9.5pt; color: var(--accent); }
 
   /* experience: long roles may split across pages, headings stay with their first lines */

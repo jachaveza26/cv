@@ -108,7 +108,6 @@ test("every print skill item also appears in the web skill groups", () => {
     "guardrail design & fact-checking",
     "Retell / VAPI",
     "Supabase (Postgres, pg_cron)",
-    "OAuth 2.0 / HMAC tokens",
   ]);
   for (const group of cv.skills.pdf) {
     for (const item of group.items) {
