@@ -79,53 +79,56 @@ footer { border-top: 1px solid var(--line); padding: 1.5rem 1.25rem 3rem; text-a
 .updated { margin: 0; }
 
 @media print {
+  /* page and base */
   @page { size: Letter; margin: 0.5in 0.6in; }
   :root { --bg: #fff; --fg: #111; --muted: #444; --line: #ccc; --accent: #0b4f8a; --card: #fff; --chip: #eee; font-size: 9.5pt; line-height: 1.3; }
-  .topnav, footer, .actions { display: none !important; }
   main { max-width: none; padding: 0; }
-  .hero { grid-template-columns: 1in 1fr; gap: 0.2in; border-bottom: 1px solid var(--line); padding-bottom: 0.08in; }
-  .photo { width: 0.85in; border-radius: 6px; }
-  .print-contact { display: block; font-size: 9.5pt; color: var(--muted); }
+  a { color: inherit; text-decoration: none; }
+  .topnav, footer, .actions, .lede, .links, .chips, .screen-only { display: none !important; }
+  .print-only { display: block; }
+
+  /* spacing: tighter than screen so the CV fits two pages */
+  p { margin: 0 0 0.05in; orphans: 3; widows: 3; }
+  ul { margin: 0.02in 0 0.05in; padding-left: 0.16in; }
+  li { margin: 0; orphans: 3; widows: 3; }
   h1 { font-size: 18pt; }
   h2 { font-size: 13pt; padding-top: 0.1in; margin-bottom: 0.05in; break-after: avoid; }
-  h3 { font-size: 10.5pt; }
-  .job { padding: 0.06in 0; break-inside: auto; }
-  .job-head { break-inside: avoid; break-after: avoid; }
-  p, li { orphans: 3; widows: 3; }
-  a { color: inherit; text-decoration: none; }
-  .print-contact, .links a { color: var(--accent); }
-  .screen-only { display: none !important; }
-  .print-only { display: block; }
-  .lede, .links { display: none; }
+  h3 { font-size: 10.5pt; margin: 0; }
+  dl { margin: 0.04in 0 0.08in; gap: 0.02in 0.2in; }
+
+  /* header */
+  .hero { grid-template-columns: 1in 1fr; gap: 0.2in; border-bottom: 1px solid var(--line); padding-bottom: 0.08in; }
+  .photo { width: 0.85in; border-radius: 6px; }
+  .print-contact { display: block; font-size: 9.5pt; color: var(--accent); }
+
+  /* experience: long roles may split across pages, headings stay with their first lines */
+  .job { padding: 0.05in 0; break-inside: auto; }
+  .job-head { gap: 0 0.2in; break-inside: avoid; break-after: avoid; }
+  .summary { margin-top: 0.03in; }
+
   /* projects: featured only, one line each */
   .card:not(.featured) { display: none; }
   .grid { display: block; }
   .card { display: block; width: auto; margin: 0 0 0.04in; padding: 0; border: 0; border-radius: 0; break-inside: avoid; }
   .card h3 { display: inline; font-size: 10.5pt; }
   .card h3::after { content: " — "; }
-  .card p { display: inline; }
-  .card .status { display: inline; }
+  .card p, .card .status { display: inline; }
   .card .status::before { content: " · "; }
-  .chips { display: none; }
-  /* soft skills: names only */
-  .soft { display: block; }
-  .soft dt { display: inline; font-weight: 500; }
-  .soft dt:not(:last-of-type)::after { content: " · "; }
-  .soft dd { display: none; }
-  /* technical skills as plain lines */
+
+  /* technical skills as plain lines, from skills.pdf */
   dl.print-only { display: block; }
   dl.print-only dt { display: inline; font-weight: 650; }
   dl.print-only dt::after { content: ": "; }
   dl.print-only dd { display: inline; margin: 0; }
   dl.print-only dd::after { content: "\A"; white-space: pre; }
-  p { margin: 0 0 0.05in; }
-  ul { margin: 0.02in 0 0.05in; padding-left: 0.16in; }
-  li { margin: 0; }
-  h3 { margin: 0; }
-  .job { padding: 0.05in 0; }
-  .job-head { gap: 0 0.2in; }
-  .summary { margin-top: 0.03in; }
-  dl { margin: 0.04in 0 0.08in; gap: 0.02in 0.2in; }
-  #education ul, #education p { margin-bottom: 0.03in; }
+
+  /* soft skills: names only */
+  .soft { display: block; }
+  .soft dt { display: inline; font-weight: 500; }
+  .soft dt:not(:last-of-type)::after { content: " · "; }
+  .soft dd { display: none; }
+
+  /* keep these blocks whole */
   .soft, #education { break-inside: avoid; }
+  #education ul, #education p { margin-bottom: 0.03in; }
 }
