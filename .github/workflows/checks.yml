@@ -38,7 +38,7 @@ jobs:
       - name: Check links
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --no-progress --verbose --accept 200,206,403,429,999 --base dist dist/index.html
+          args: --no-progress --verbose --accept 200,206,403,429,999 dist/index.html
           fail: true
 
       - uses: actions/upload-artifact@v4
