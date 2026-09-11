@@ -74,6 +74,22 @@
       "compact": false
     },
     {
+      "role": "Data Analyst",
+      "org": "Conduent de México",
+      "location": "Mexico",
+      "start": "2021-04",
+      "end": "2021-08",
+      "summary": "",
+      "bullets": [
+        "Wrote and optimized SQL statements for more efficient data analysis.",
+        "Designed customized data collection models for visualization tasks.",
+        "Created data analysis tools for easy querying and insight generation.",
+        "Implemented advanced data visualizations in Power BI dashboards."
+      ],
+      "links": [],
+      "compact": false
+    },
+    {
       "role": "Business Data Analyst (part-time)",
       "org": "Prosepago",
       "location": "Mexico",

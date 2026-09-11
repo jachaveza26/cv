@@ -92,9 +92,9 @@ test("exactly six cards carry the featured class", () => {
   assert.equal((html.match(/class="card featured"/g) ?? []).length, 6);
 });
 
-test("experience has five entries and no removed employers", () => {
-  assert.equal((html.match(/<article class="job/g) ?? []).length, 5);
-  assert.doesNotMatch(html, /Conduent|ZMBDi|PSM Payment Services/);
+test("experience has six entries and no removed employers", () => {
+  assert.equal((html.match(/<article class="job/g) ?? []).length, 6);
+  assert.doesNotMatch(html, /ZMBDi|PSM Payment Services/);
 });
 
 test("every print skill item also appears in the web skill groups", () => {

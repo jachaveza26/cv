@@ -21,7 +21,7 @@ try {
     format: "Letter",
     printBackground: true,
     preferCSSPageSize: true,
-    margin: { top: "0.6in", bottom: "0.6in", left: "0.7in", right: "0.7in" },
+    margin: { top: "0.5in", bottom: "0.5in", left: "0.6in", right: "0.6in" },
   });
 } finally {
   await browser.close();
