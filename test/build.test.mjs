@@ -105,3 +105,9 @@ test("only one technical skills list is rendered", () => {
   assert.equal((html.match(/<dl class="hard/g) ?? []).length, 1);
   assert.doesNotMatch(html, /print-only|screen-only/);
 });
+
+test("build copies the self-hosted fonts", () => {
+  for (const f of ["Fraunces-normal-latin.woff2", "Fraunces-italic-latin.woff2", "InterTight-normal-latin.woff2"]) {
+    assert.ok(existsSync(path.join(out, "assets", "fonts", f)), `missing ${f}`);
+  }
+});

@@ -38,6 +38,9 @@ function head(cv, updated) {
 <meta property="og:url" content="${esc(site)}/">
 <meta property="og:image" content="${esc(site)}/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231E40AF'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='40' fill='%23F6F4EE'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/Fraunces-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/InterTight-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <script type="application/ld+json">${JSON.stringify(person).replace(/</g, "\\u003c")}</script>`;
 }
@@ -45,12 +48,11 @@ function head(cv, updated) {
 function header(cv) {
   const { name, title, tagline, location, email, linkedin, github, photo, portfolio } = cv.identity;
   return `<header class="hero">
-  <img class="photo" src="assets/${esc(photo)}" alt="Portrait of ${esc(name)}" width="200" height="267">
+  <div class="hero-inner">
   <div class="hero-text">
     <h1>${esc(name)}</h1>
-    <p class="title">${esc(title)}</p>
+    <p class="title">${esc(title)}<span class="location">${esc(location)}</span></p>
     <p class="tagline">${esc(tagline)}</p>
-    <p class="location">${esc(location)}</p>
     <p class="actions">
       <a class="btn" href="mailto:${esc(email)}">Email</a>
       <a class="btn" href="${esc(linkedin)}" rel="me">LinkedIn</a>
@@ -59,10 +61,12 @@ function header(cv) {
     </p>
     <p class="print-contact">${esc(email)} · ${esc(linkedin)} · ${esc(github)} · ${esc(portfolio)}</p>
   </div>
+  <img class="photo" src="assets/${esc(photo)}" alt="Portrait of ${esc(name)}" width="200" height="267">
+  </div>
 </header>`;
 }
 
-const nav = () => `<nav class="topnav" aria-label="Sections">
+const nav = () => `<nav class="rail" aria-label="Sections">
   <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#education">Education</a>
 </nav>`;
 
@@ -70,7 +74,7 @@ const about = (cv) => `<section id="about"><h2>About</h2>${cv.profile.map((p) =>
 
 function job(j) {
   const dates = `<p class="dates"><time datetime="${j.start}">${fmtMonth(j.start)}</time> – ${j.end ? `<time datetime="${j.end}">${fmtMonth(j.end)}</time>` : "Present"}</p>`;
-  const head = `<div class="job-head"><h3>${esc(j.role)}</h3><p class="org">${esc(j.org)} · ${esc(j.location)}</p>${dates}</div>`;
+  const head = `<div class="job-head"><h3>${esc(j.role)}</h3><p class="org">${esc(j.org)}, ${esc(j.location)}</p>${dates}</div>`;
   if (j.compact) return `<article class="job compact" id="job-${slug(j.org)}">${head}<p class="summary">${esc(j.summary)}</p></article>`;
   const summary = j.summary ? `<p class="summary">${esc(j.summary)}</p>` : "";
   const bullets = j.bullets.length ? `<ul>${li(j.bullets)}</ul>` : "";
@@ -85,11 +89,14 @@ const experience = (cv) =>
 
 const projects = (cv) => `<section id="projects"><h2>Selected projects</h2>
 <p class="lede">One case study per project, written for another engineer, in the <a href="${esc(cv.identity.portfolio)}">portfolio repository</a>.</p>
-<div class="grid">${cv.projects
-  .map(
-    (p) => `<a class="card${p.featured ? " featured" : ""}" href="${esc(p.url)}"><h3>${esc(p.name)}</h3><p>${esc(p.oneLiner)}</p><ul class="chips">${li(p.stack)}</ul><span class="status">${esc(p.status)}</span></a>`,
-  )
-  .join("")}</div></section>`;
+<div class="grid">
+<div class="projects-featured">${cv.projects.filter((p) => p.featured).map(card).join("")}</div>
+<h3 class="more-title">Also built</h3>
+<div class="projects-more">${cv.projects.filter((p) => !p.featured).map(card).join("")}</div>
+</div></section>`;
+
+const card = (p) =>
+  `<a class="card${p.featured ? " featured" : ""}" href="${esc(p.url)}"><h3>${esc(p.name)}</h3><p>${esc(p.oneLiner)}</p><ul class="chips">${li(p.stack)}</ul><span class="status">${esc(p.status)}</span></a>`;
 
 const skills = (cv) => `<section id="skills"><h2>Skills</h2>
 <h3>Technical</h3>
@@ -116,15 +123,17 @@ export function render(cv, { updated }) {
 ${head(cv, updated)}
 </head>
 <body>
+${header(cv)}
+<div class="layout">
 ${nav()}
 <main>
-${header(cv)}
 ${about(cv)}
 ${experience(cv)}
 ${projects(cv)}
 ${skills(cv)}
 ${education(cv)}
 </main>
+</div>
 ${footer(cv, updated)}
 </body>
 </html>

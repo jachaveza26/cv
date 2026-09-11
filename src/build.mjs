@@ -16,6 +16,7 @@ export function build({ outDir = path.join(root, "dist"), now = new Date() } = {
   mkdirSync(path.join(outDir, "assets"), { recursive: true });
   writeFileSync(path.join(outDir, "index.html"), render(cv, { updated: now.toISOString().slice(0, 10) }));
   cpSync(path.join(root, "src/styles.css"), path.join(outDir, "styles.css"));
+  cpSync(path.join(root, "assets/fonts"), path.join(outDir, "assets/fonts"), { recursive: true });
   for (const file of [cv.identity.photo, "og-image.png"]) {
     const src = path.join(root, "assets", file);
     if (!existsSync(src)) throw new Error(`required asset missing: assets/${file}`);

@@ -46,6 +46,7 @@ cv/
   assets/andres-chavez.jpg     original photo
   assets/andres-chavez-400.webp  resized for the page (generated once, committed)
   assets/og-image.png          1200×630 Open Graph image (generated once, committed)
+  assets/fonts/*.woff2         Fraunces (normal, italic) and Inter Tight latin subsets, self-hosted
   scripts/pdf.mjs              Playwright: dist/index.html (print media) → dist/Andres-Chavez-CV.pdf
   test/build.test.mjs          node:test suite (see Quality)
   .github/workflows/checks.yml build → test → html-validate → lychee → pdf (quality gate, no deploy)
@@ -100,7 +101,7 @@ Single page, sticky anchor navigation: **About · Experience · Projects · Skil
 
 ## Visual direction
 
-Restrained editorial style. One typeface: the system font stack (no external font requests, nothing to load before the text renders). Generous whitespace, clear hierarchy, no decorative animation. Light and dark palettes via `prefers-color-scheme`, defined as CSS custom properties. Mobile-first layout; the projects grid collapses to one column under 640px. Color contrast meets WCAG AA. Semantic HTML: `header`, `nav`, `main`, `section` with headings, `article` per experience entry, `img` with meaningful `alt`.
+Editorial style with presence, coherent with the Streamlite brand (same serif and blue, own paper tone). Two self-hosted typefaces committed as latin woff2 subsets in `assets/fonts/` (no external font requests): Fraunces for the name, section headings, the opening line and featured project names; Inter Tight for everything else. Self-hosting also makes the PDF identical on macOS and in the Linux build container. Full-width header (name, title and location, opening line in italic, actions, portrait), then a sticky section rail beside the content on desktop; experience as a dated timeline with dates in a left gutter; projects as featured rows plus a compact "Also built" list; one page-load reveal, no other motion. Generous whitespace, clear hierarchy, no decorative animation. Light and dark palettes via `prefers-color-scheme`, defined as CSS custom properties. Mobile-first layout; the projects grid collapses to one column under 640px. Color contrast meets WCAG AA. Semantic HTML: `header`, `nav`, `main`, `section` with headings, `article` per experience entry, `img` with meaningful `alt`.
 
 ## Print / PDF
 
