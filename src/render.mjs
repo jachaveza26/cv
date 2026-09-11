@@ -87,13 +87,14 @@ const projects = (cv) => `<section id="projects"><h2>Selected projects</h2>
 <p class="lede">One case study per project, written for another engineer, in the <a href="${esc(cv.identity.portfolio)}">portfolio repository</a>.</p>
 <div class="grid">${cv.projects
   .map(
-    (p) => `<a class="card" href="${esc(p.url)}"><h3>${esc(p.name)}</h3><p>${esc(p.oneLiner)}</p><ul class="chips">${li(p.stack)}</ul><span class="status">${esc(p.status)}</span></a>`,
+    (p) => `<a class="card${p.featured ? " featured" : ""}" href="${esc(p.url)}"><h3>${esc(p.name)}</h3><p>${esc(p.oneLiner)}</p><ul class="chips">${li(p.stack)}</ul><span class="status">${esc(p.status)}</span></a>`,
   )
   .join("")}</div></section>`;
 
 const skills = (cv) => `<section id="skills"><h2>Skills</h2>
 <h3>Technical</h3>
-<dl class="hard">${cv.skills.hard.map((g) => `<dt>${esc(g.group)}</dt><dd>${g.items.map(esc).join(" · ")}</dd>`).join("")}</dl>
+<dl class="hard screen-only">${cv.skills.hard.map((g) => `<dt>${esc(g.group)}</dt><dd>${g.items.map(esc).join(" · ")}</dd>`).join("")}</dl>
+<dl class="hard print-only">${cv.skills.pdf.map((g) => `<dt>${esc(g.group)}</dt><dd>${g.items.map(esc).join(" · ")}</dd>`).join("")}</dl>
 <h3>How I work</h3>
 <dl class="soft">${cv.skills.soft.map((s) => `<dt>${esc(s.name)}</dt><dd>${esc(s.evidence)}</dd>`).join("")}</dl></section>`;
 

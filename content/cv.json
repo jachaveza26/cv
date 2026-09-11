@@ -25,12 +25,12 @@
       "end": null,
       "summary": "AI automation consultancy for small and mid-size businesses across Canada, the US and Mexico. Sole engineer on every engagement: discovery, architecture, build, deploy, billing and on-call.",
       "bullets": [
-        "Built and operate GBP Manager, a multi-tenant SaaS that audits Google Business Profiles and drafts review replies and posts with an LLM; nothing publishes without a per-item human approval record. Google API production access approved after two rejections. Audited my own stack six weeks in and closed four security issues, including approval links being auto-approved by corporate email scanners.",
-        "Automated Canadian immigration PDF forms from one canonical intake schema using Claude tool use and XFA XML manipulation; in production for an immigration consultancy.",
-        "Delivered ScopeForge, a bid-intelligence platform for a commercial millwork subcontractor: AI scope extraction from bid packages, BuildingConnected sync, DOCX proposal generation and an automated follow-up sequence.",
-        "Own the BI and compliance stack for a Mexican POS distributor: a ~30M-row Power BI model with incremental refresh, a redesigned daily alerting system, and a PLD/AML transactional monitoring layer with fraud detectors, per-merchant thresholds and an audited retention workflow.",
-        "Shipped Relay, social and local-SEO automation for a paying client, on the Meta Graph API at Standard Access with per-client isolated deployments.",
-        "Built a Microsoft licence drift detector as a paid-evaluation prototype for a managed service provider: 100% recall and zero false positives against a ground-truth dataset."
+        "Built and run GBP Manager, a multi-tenant LLM SaaS for Google Business Profiles; nothing publishes without a per-item human approval record. Google API production access approved after two rejections.",
+        "Automated Canadian immigration (IRCC) PDF forms from one canonical schema using Claude tool use and XFA XML; in production for an immigration consultancy.",
+        "Delivered ScopeForge, a bid-intelligence platform for a millwork subcontractor: AI scope extraction from bid packages, BuildingConnected sync, DOCX proposals and an automated 3-step follow-up.",
+        "Own a ~30M-row Power BI model and a PLD/AML transactional monitoring layer (fraud detectors, per-merchant thresholds, audited retention) for a Mexican POS distributor.",
+        "Shipped Relay, social and local-SEO automation on the Meta Graph API at Standard Access, deployed per client on isolated branches; one paying client.",
+        "Built a Microsoft licence drift detector as a paid-evaluation prototype for an MSP: 100% recall, zero false positives on a ground-truth set."
       ],
       "links": [
         { "label": "GBP Manager", "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/gbp-manager.md" },
@@ -74,86 +74,43 @@
       "compact": false
     },
     {
-      "role": "Data Analyst",
-      "org": "Conduent de México",
+      "role": "Business Data Analyst (part-time)",
+      "org": "Prosepago",
       "location": "Mexico",
-      "start": "2021-04",
-      "end": "2022-05",
-      "summary": "",
+      "start": "2020-09",
+      "end": "2021-04",
+      "summary": "Part-time engagement with the POS distributor that re-engaged Streamlite in 2025 for its BI and PLD/AML stack (see above).",
       "bullets": [
-        "Wrote and optimized SQL statements for more efficient data analysis.",
-        "Designed customized data collection models for visualization tasks.",
-        "Created data analysis tools for easy querying and insight generation.",
+        "Implemented ActiveCampaign as the CRM and trained employees on it for improved data management.",
         "Implemented advanced data visualizations in Power BI dashboards."
       ],
       "links": [],
       "compact": false
     },
     {
-      "role": "Business Data Analyst",
-      "org": "PSM Payment Services",
-      "location": "Mexico",
-      "start": "2020-09",
-      "end": "2021-08",
-      "summary": "",
-      "bullets": [
-        "Implemented a CRM (ActiveCampaign) and trained employees on it for improved data management.",
-        "Implemented advanced data visualizations in Power BI dashboards."
-      ],
-      "links": [],
-      "compact": false
-    },
-    {
-      "role": "IT Support",
-      "org": "ZMBDi Management & Consulting",
-      "location": "Mexico",
-      "start": "2020-09",
-      "end": "2021-09",
-      "summary": "",
-      "bullets": [
-        "Designed, implemented and monitored web pages and plugins for continuous improvement.",
-        "Implemented a CRM and trained employees on it.",
-        "Provided front-end development and website maintenance training.",
-        "Used market research strategies to improve campaign planning."
-      ],
-      "links": [],
-      "compact": false
-    },
-    {
-      "role": "Computer System Analyst",
-      "org": "Desarrollos y Servicios Computacionales",
-      "location": "Mexico",
-      "start": "2013-05",
-      "end": "2020-08",
-      "summary": "End-user troubleshooting and desktop support across multiple operating systems; software and hardware solutions for business clients, mainly in the restaurant industry; website design, implementation and monitoring.",
-      "bullets": [],
-      "links": [],
-      "compact": true
-    },
-    {
-      "role": "Software Engineer",
-      "org": "LANIX",
+      "role": "Earlier career",
+      "org": "Desarrollos y Servicios Computacionales · LANIX",
       "location": "Mexico",
       "start": "2009-07",
-      "end": "2013-05",
-      "summary": "Server software implementation and virtual machine management; development and maintenance of web applications and database design; SAP ABAP development (Z tables, Smart Forms, user exits, ALV reports).",
+      "end": "2020-08",
+      "summary": "Computer systems analyst at DSC (2013–2020): end-user support across operating systems, software and hardware solutions for restaurant-industry clients, website build and monitoring. Software engineer at LANIX (2009–2013): server and virtual-machine management, web applications and database design, SAP ABAP (Z tables, Smart Forms, user exits, ALV reports).",
       "bullets": [],
       "links": [],
       "compact": true
     }
   ],
   "projects": [
-    { "name": "GBP Manager", "oneLiner": "Multi-tenant AI SaaS that audits Google Business Profiles, drafts review replies and posts — every publish behind a human approval record.", "stack": ["Next.js", "Python", "Supabase", "Stripe", "Railway"], "status": "Production, pre-traction", "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/gbp-manager.md" },
-    { "name": "IRCC Form Automation", "oneLiner": "Fills Canadian immigration PDFs from a canonical intake schema using LLM tool use and XFA XML manipulation.", "stack": ["FastAPI", "Claude Tool Use", "XFA XML"], "status": "Production", "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/ircc-form-automation.md" },
-    { "name": "ScopeForge / MCI Bids", "oneLiner": "Bid-intelligence platform for commercial construction subcontractors: AI scope extraction, proposal generation, pipeline tracking.", "stack": ["Python", "Railway", "BuildingConnected API"], "status": "Production, 1 client", "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/scopeforge-mci-bids.md" },
-    { "name": "Relay", "oneLiner": "Multi-tenant social and local-SEO automation, deployed per client on isolated branches.", "stack": ["TypeScript", "Supabase", "Meta Graph API", "DataForSEO"], "status": "Production, paying client", "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/relay.md" },
-    { "name": "Prosepago", "oneLiner": "~30M-row Power BI model for a Mexican POS distributor, plus PLD/AML transactional monitoring and open-data prospecting.", "stack": ["Power BI", "DAX", "Python", "PostgreSQL"], "status": "Production", "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/prosepago-bi.md" },
-    { "name": "Eden Estimator", "oneLiner": "The repo where my engineering practices live: Vitest suite, Docker, Caddy, pnpm monorepo, sliced delivery.", "stack": ["TypeScript", "Vitest", "Docker", "Supabase"], "status": "In development", "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/eden-estimator.md" },
-    { "name": "Licence Reconciliation", "oneLiner": "Microsoft licence drift detector built as a paid-evaluation prototype — 100% recall, zero false positives on a ground-truth set.", "stack": ["Python", "FastAPI", "Microsoft Graph"], "status": "Prototype, delivered", "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/licence-reconciliation.md" },
-    { "name": "Voice Agents", "oneLiner": "Retell and VAPI voice agents embedded in a Next.js product surface.", "stack": ["Next.js", "Retell AI", "VAPI"], "status": "Production", "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/voice-agents.md" },
-    { "name": "CFSF Loan Automation", "oneLiner": "Nine-deliverable automation architecture for a non-profit lender, designed under a hard no-PII constraint.", "stack": ["FastAPI", "AI agents", "DocuSign (Phase 2)"], "status": "Designed, not built", "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/cfsf-loan-automation.md" },
-    { "name": "Content Pipeline", "oneLiner": "Near-fully automated Spanish video pipeline with data-driven niche validation and a tiered model-cost strategy.", "stack": ["Python", "SQLite", "Streamlit", "multi-model video APIs"], "status": "Production", "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/content-pipeline.md" },
-    { "name": "Anota", "oneLiner": "Native Android note app — my first mobile project, built to find out where AI assistance stops working.", "stack": ["Kotlin", "Gradle"], "status": "In development", "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/anota.md" }
+    { "name": "GBP Manager", "oneLiner": "Multi-tenant AI SaaS that audits Google Business Profiles, drafts review replies and posts — every publish behind a human approval record.", "stack": ["Next.js", "Python", "Supabase", "Stripe", "Railway"], "status": "Production, pre-traction", "featured": true, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/gbp-manager.md" },
+    { "name": "IRCC Form Automation", "oneLiner": "Fills Canadian immigration PDFs from a canonical intake schema using LLM tool use and XFA XML manipulation.", "stack": ["FastAPI", "Claude Tool Use", "XFA XML"], "status": "Production", "featured": true, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/ircc-form-automation.md" },
+    { "name": "ScopeForge / MCI Bids", "oneLiner": "Bid-intelligence platform for commercial construction subcontractors: AI scope extraction, proposal generation, pipeline tracking.", "stack": ["Python", "Railway", "BuildingConnected API"], "status": "Production, 1 client", "featured": true, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/scopeforge-mci-bids.md" },
+    { "name": "Relay", "oneLiner": "Multi-tenant social and local-SEO automation, deployed per client on isolated branches.", "stack": ["TypeScript", "Supabase", "Meta Graph API", "DataForSEO"], "status": "Production, paying client", "featured": true, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/relay.md" },
+    { "name": "Prosepago", "oneLiner": "~30M-row Power BI model for a Mexican POS distributor, plus PLD/AML transactional monitoring and open-data prospecting.", "stack": ["Power BI", "DAX", "Python", "PostgreSQL"], "status": "Production", "featured": true, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/prosepago-bi.md" },
+    { "name": "Eden Estimator", "oneLiner": "The repo where my engineering practices live: Vitest suite, Docker, Caddy, pnpm monorepo, sliced delivery.", "stack": ["TypeScript", "Vitest", "Docker", "Supabase"], "status": "In development", "featured": false, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/eden-estimator.md" },
+    { "name": "Licence Reconciliation", "oneLiner": "Microsoft licence drift detector built as a paid-evaluation prototype — 100% recall, zero false positives on a ground-truth set.", "stack": ["Python", "FastAPI", "Microsoft Graph"], "status": "Prototype, delivered", "featured": true, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/licence-reconciliation.md" },
+    { "name": "Voice Agents", "oneLiner": "Retell and VAPI voice agents embedded in a Next.js product surface.", "stack": ["Next.js", "Retell AI", "VAPI"], "status": "Production", "featured": false, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/voice-agents.md" },
+    { "name": "CFSF Loan Automation", "oneLiner": "Nine-deliverable automation architecture for a non-profit lender, designed under a hard no-PII constraint.", "stack": ["FastAPI", "AI agents", "DocuSign (Phase 2)"], "status": "Designed, not built", "featured": false, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/cfsf-loan-automation.md" },
+    { "name": "Content Pipeline", "oneLiner": "Near-fully automated Spanish video pipeline with data-driven niche validation and a tiered model-cost strategy.", "stack": ["Python", "SQLite", "Streamlit", "multi-model video APIs"], "status": "Production", "featured": false, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/content-pipeline.md" },
+    { "name": "Anota", "oneLiner": "Native Android note app — my first mobile project, built to find out where AI assistance stops working.", "stack": ["Kotlin", "Gradle"], "status": "In development", "featured": false, "url": "https://github.com/jachaveza26/portfolio/blob/main/projects/anota.md" }
   ],
   "skills": {
     "hard": [
@@ -165,8 +122,14 @@
       { "group": "APIs & integrations", "items": ["Google Business Profile API", "Microsoft Graph", "Meta Graph (Standard Access)", "WhatsApp Cloud API", "BuildingConnected", "Jobber GraphQL", "Zoho", "Stripe", "Twilio", "DataForSEO"] },
       { "group": "Infra", "items": ["Docker", "Caddy", "Railway", "Cloudflare Pages", "GitHub Actions"] },
       { "group": "Quality", "items": ["Vitest", "conventional commits", "sliced delivery"] },
-      { "group": "Security", "items": ["OAuth 2.0", "single-use HMAC tokens", "per-tenant ownership validation"] },
-      { "group": "Business tools", "items": ["Pipedrive", "HubSpot", "ActiveCampaign", "Jira", "Trello", "WordPress", "Google Analytics"] }
+      { "group": "Security", "items": ["OAuth 2.0", "single-use HMAC tokens", "per-tenant ownership validation"] }
+    ],
+    "pdf": [
+      { "group": "Languages", "items": ["Python", "TypeScript", "SQL / PLpgSQL", "DAX"] },
+      { "group": "AI / LLM", "items": ["Claude API & tool use", "guardrail design & fact-checking", "multi-agent orchestration", "prompt versioning", "Retell / VAPI"] },
+      { "group": "Backend & data", "items": ["FastAPI", "Supabase (Postgres, pg_cron)", "Next.js", "n8n", "Power BI", "pandas"] },
+      { "group": "Integrations", "items": ["Google Business Profile API", "Microsoft Graph", "Meta Graph", "Stripe", "Twilio"] },
+      { "group": "Infra & quality", "items": ["Docker", "Caddy", "Railway", "GitHub Actions", "Vitest", "OAuth 2.0 / HMAC tokens"] }
     ],
     "soft": [
       { "name": "Client discovery and scoping", "evidence": "Runs paid discovery workshops credited against the build, so scope is defined before code is written." },

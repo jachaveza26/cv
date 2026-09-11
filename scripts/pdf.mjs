@@ -30,7 +30,7 @@ try {
 // Chromium writes page objects uncompressed, so counting "/Type /Page" (not "/Pages") is reliable enough for a guard.
 const pages = (readFileSync(out, "latin1").match(/\/Type\s*\/Page(?!s)/g) ?? []).length;
 console.log(`wrote ${out} (${statSync(out).size} bytes, ${pages} pages)`);
-if (pages === 0 || pages > 4) {
-  console.error(`PDF page count out of range (expected 1–4, got ${pages})`);
+if (pages === 0 || pages > 3) {
+  console.error(`PDF page count out of range (expected 1–3, got ${pages})`);
   process.exit(1);
 }
