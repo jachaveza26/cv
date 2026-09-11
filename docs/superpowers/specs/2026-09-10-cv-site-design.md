@@ -109,7 +109,7 @@ Editorial style with presence, coherent with the Streamlite brand (same serif an
 
 ## SEO and metadata
 
-`<title>`, meta description, canonical `https://andres.streamlite.ca/`, Open Graph and Twitter card tags with `og-image.png`, and a JSON-LD `Person` block with name, job title, location, `sameAs` LinkedIn and GitHub. `robots` allowed. No analytics, no cookies, therefore no consent banner.
+`<title>`, meta description, canonical `https://andres.streamlite.ca/`, Open Graph and Twitter card tags with `og-image.png`, and a JSON-LD `Person` block with name, job title, location, `sameAs` LinkedIn and GitHub. `robots` allowed. Google Analytics 4 (property 'andres.streamlite.ca', measurement id in `identity.analytics`, added 2026-09-11 at Andrés's request) counts visits; the tag is emitted only when the id is present and the footer states that visits are counted. No consent banner: the audience is Canada/US recruiters and the footer notice is the disclosure.
 
 ## Build and deploy
 

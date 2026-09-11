@@ -112,3 +112,12 @@ test("build copies the self-hosted fonts", () => {
     assert.ok(existsSync(path.join(out, "assets", "fonts", f)), `missing ${f}`);
   }
 });
+
+test("Google Analytics tag is emitted only when an id is configured", () => {
+  assert.match(html, /googletagmanager\.com\/gtag\/js\?id=G-BV3G8T8V2H/);
+  assert.match(html, /gtag\("config","G-BV3G8T8V2H"/);
+  const cv = JSON.parse(readFileSync(new URL("../content/cv.json", import.meta.url), "utf8"));
+  delete cv.identity.analytics;
+  const without = render(cv, { updated: "2026-09-11" });
+  assert.doesNotMatch(without, /googletagmanager|gtag\(/);
+});

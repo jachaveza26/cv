@@ -14,7 +14,7 @@ export const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").r
 const li = (items) => items.map((i) => `<li>${esc(i)}</li>`).join("");
 
 function head(cv, updated) {
-  const { name, title, tagline, site, photo, email, linkedin, github, location } = cv.identity;
+  const { name, title, tagline, site, photo, email, linkedin, github, location, analytics } = cv.identity;
   const person = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -42,8 +42,12 @@ function head(cv, updated) {
 <link rel="preload" href="assets/fonts/Fraunces-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/InterTight-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
-<script type="application/ld+json">${JSON.stringify(person).replace(/</g, "\\u003c")}</script>`;
+<script type="application/ld+json">${JSON.stringify(person).replace(/</g, "\\u003c")}</script>${analytics ? gtag(analytics) : ""}`;
 }
+
+const gtag = (id) => `
+<script async src="https://www.googletagmanager.com/gtag/js?id=${esc(id)}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","${esc(id)}",{anonymize_ip:true});</script>`;
 
 function header(cv) {
   const { name, title, tagline, location, email, linkedin, github, photo, portfolio } = cv.identity;
@@ -113,7 +117,7 @@ const education = (cv) => `<section id="education"><h2>Education</h2>
 
 const footer = (cv, updated) => `<footer>
   <p><a href="mailto:${esc(cv.identity.email)}">${esc(cv.identity.email)}</a> · <a href="${esc(cv.identity.linkedin)}">LinkedIn</a> · <a href="${esc(cv.identity.github)}">GitHub</a> · <a href="${esc(cv.identity.portfolio)}">Portfolio</a></p>
-  <p class="updated">Last updated ${esc(updated)}</p>
+  <p class="updated">Last updated ${esc(updated)}${cv.identity.analytics ? " · Visits are counted with Google Analytics." : ""}</p>
 </footer>`;
 
 export function render(cv, { updated }) {
